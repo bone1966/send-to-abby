@@ -188,6 +188,54 @@ def fetch_upload(filename):
     return send_from_directory(UPLOAD_DIR, safe)
 
 
+LEGAL_PAGE = """
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title} — Send to Abby-Normal</title>
+<style>
+  body{{font-family:-apple-system,system-ui,sans-serif;background:#0a0a0a;color:#ddd;
+       max-width:640px;margin:40px auto;padding:0 20px;line-height:1.6}}
+  h1{{color:#2dd4bf}}
+</style>
+</head>
+<body>
+<h1>{title}</h1>
+{body}
+</body>
+</html>
+"""
+
+
+@app.get("/privacy")
+def privacy():
+    body = """
+    <p>This tool is a personal utility for its owner (Keith Lutz / FirstRing
+    LLC), not a public product or a mailing list.</p>
+    <p>Phone numbers are used for exactly one purpose: sending the one-time
+    upload link that was requested. Numbers are never sold, shared with any
+    third party, or used for marketing. Uploaded files are stored only long
+    enough for the owner to retrieve them and are not shared with anyone
+    else.</p>
+    <p>Reply STOP to any message to stop receiving links at that number.</p>
+    <p>Questions: keithlutzdea@gmail.com</p>
+    """
+    return render_template_string(LEGAL_PAGE, title="Privacy Policy", body=body)
+
+
+@app.get("/terms")
+def terms():
+    body = """
+    <p>By requesting or using an upload link from this tool, you agree to
+    use it only to send the intended file to its owner. Links expire after
+    24 hours and work once.</p>
+    <p>Message and data rates may apply. Reply STOP to opt out, HELP for
+    help.</p>
+    """
+    return render_template_string(LEGAL_PAGE, title="Terms and Conditions", body=body)
+
+
 @app.get("/healthz")
 def healthz():
     return {"ok": True}
