@@ -1,0 +1,4 @@
+uploads/
+tokens.db
+__pycache__/
+.env
