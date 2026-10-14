@@ -221,7 +221,7 @@ def privacy():
     <p>Reply STOP to any message to stop receiving links at that number.</p>
     <p>Questions: keithlutzdea@gmail.com</p>
     """
-    return render_template_string(LEGAL_PAGE, title="Privacy Policy", body=body)
+    return LEGAL_PAGE.format(title="Privacy Policy", body=body)
 
 
 @app.get("/terms")
@@ -233,7 +233,7 @@ def terms():
     <p>Message and data rates may apply. Reply STOP to opt out, HELP for
     help.</p>
     """
-    return render_template_string(LEGAL_PAGE, title="Terms and Conditions", body=body)
+    return LEGAL_PAGE.format(title="Terms and Conditions", body=body)
 
 
 @app.get("/healthz")
